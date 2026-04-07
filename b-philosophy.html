@@ -57,8 +57,33 @@ img { max-width: 100%; height: auto; display: block; }
 .section-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 40px; margin-bottom: 40px; }
 .section-card h2 { font-size: 1.4rem; font-weight: 700; color: #0066cc; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #0066cc; }
 
-.philosophy-image { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.1); }
+.philosophy-image { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.1); margin-bottom: 40px; }
 .philosophy-image img { width: 100%; height: auto; }
+
+.philosophy-mission { text-align: center; margin-bottom: 48px; }
+.philosophy-mission-label { font-size: 0.85rem; font-weight: 700; color: #0066cc; letter-spacing: 0.2em; margin-bottom: 12px; }
+.philosophy-mission h3 { font-size: 1.8rem; font-weight: 700; color: #222; line-height: 1.6; margin-bottom: 16px; }
+.philosophy-mission p { font-size: 0.95rem; color: #666; max-width: 600px; margin: 0 auto; }
+.philosophy-divider { width: 60px; height: 3px; background: linear-gradient(90deg, #0066cc, #0099ff); margin: 40px auto; border-radius: 2px; }
+
+.philosophy-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
+.philosophy-value { background: #f8f9fa; border-radius: 12px; padding: 32px 24px; text-align: center; transition: all 0.3s ease; border: 1px solid transparent; }
+.philosophy-value:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,102,204,0.1); border-color: rgba(0,102,204,0.15); }
+.philosophy-value-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #0066cc, #0099ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.5rem; color: #fff; }
+.philosophy-value h4 { font-size: 1.05rem; font-weight: 700; color: #333; margin-bottom: 10px; }
+.philosophy-value p { font-size: 0.85rem; color: #666; line-height: 1.7; }
+
+.philosophy-message { background: linear-gradient(135deg, #f0f7ff, #e8f4fd); border-radius: 12px; padding: 36px; border-left: 4px solid #0066cc; }
+.philosophy-message h3 { font-size: 1.15rem; font-weight: 700; color: #0066cc; margin-bottom: 16px; }
+.philosophy-message-list { list-style: none; }
+.philosophy-message-list li { padding: 10px 0; padding-left: 28px; position: relative; font-size: 0.95rem; color: #444; border-bottom: 1px solid rgba(0,102,204,0.08); }
+.philosophy-message-list li:last-child { border-bottom: none; }
+.philosophy-message-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; background: linear-gradient(135deg, #0066cc, #0099ff); border-radius: 50%; }
+
+@media (max-width: 768px) {
+  .philosophy-values { grid-template-columns: 1fr; }
+  .philosophy-mission h3 { font-size: 1.4rem; }
+}
 
 .footer { background: #1a1a2e; color: #fff; margin-top: 80px; }
 .footer-inner { max-width: 1200px; margin: 0 auto; padding: 50px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
@@ -136,6 +161,44 @@ img { max-width: 100%; height: auto; display: block; }
   <main class="main-content">
     <div class="section-card">
       <h2>企業理念 - PHILOSOPHY</h2>
+
+      <div class="philosophy-mission">
+        <div class="philosophy-mission-label">OUR MISSION</div>
+        <h3>確かな技術で、<br>社会インフラの安全を守る。</h3>
+        <p>私たちテクニカル・シンクは、構造物の調査・解析・設計を通じて、人々の暮らしと安全を支えています。</p>
+      </div>
+
+      <div class="philosophy-divider"></div>
+
+      <div class="philosophy-values">
+        <div class="philosophy-value">
+          <div class="philosophy-value-icon">&#9878;</div>
+          <h4>技術の追求</h4>
+          <p>最先端の検査技術とこれまで培った経験を融合し、常に高品質なサービスを提供します。</p>
+        </div>
+        <div class="philosophy-value">
+          <div class="philosophy-value-icon">&#9825;</div>
+          <h4>安全への貢献</h4>
+          <p>橋梁・トンネル等の社会インフラを守り、人々が安心して暮らせる社会の実現に貢献します。</p>
+        </div>
+        <div class="philosophy-value">
+          <div class="philosophy-value-icon">&#9733;</div>
+          <h4>人材の成長</h4>
+          <p>チームで支え合いながら一人ひとりが成長し、やりがいを持って働ける環境を大切にします。</p>
+        </div>
+      </div>
+
+      <div class="philosophy-message">
+        <h3>仲間に望むこと</h3>
+        <ul class="philosophy-message-list">
+          <li>向上心を持ち、新しい知識や技術を学び続ける姿勢</li>
+          <li>チームワークを大切にし、仲間と協力して課題を解決する力</li>
+          <li>社会インフラを守るという責任感と誇りを持つこと</li>
+        </ul>
+      </div>
+
+      <div class="philosophy-divider"></div>
+
       <div class="philosophy-image">
         <img src="image/philosophy_img.png" alt="企業理念">
       </div>
