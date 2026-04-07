@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>業務内容 | 株式会社テクニカル・シンク</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Noto Sans JP', sans-serif; background: #0a1628; color: #e0e6ef;
+  line-height: 1.8; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+ul { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+.header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  padding: 0 40px; height: 80px; display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.4s ease, box-shadow 0.4s ease; background: transparent;
+}
+.header.scrolled { background: rgba(10,22,40,0.95); box-shadow: 0 2px 30px rgba(0,0,0,0.4); backdrop-filter: blur(10px); }
+.header-logo img { height: 45px; width: auto; transition: opacity 0.3s ease; }
+.header-logo:hover img { opacity: 0.8; }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.header-twitter img { width: 28px; height: 28px; transition: transform 0.3s ease, opacity 0.3s ease; }
+.header-twitter:hover img { transform: scale(1.15); opacity: 0.8; }
+.hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; width: 44px; height: 44px; cursor: pointer; z-index: 1100; background: none; border: none; padding: 0; }
+.hamburger span { display: block; width: 26px; height: 2px; background: #fff; transition: transform 0.35s ease, opacity 0.35s ease; margin: 4px 0; border-radius: 2px; }
+.hamburger.active span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+.mobile-nav { position: fixed; top: 0; right: -320px; width: 320px; max-width: 85vw; height: 100vh; background: rgba(10,22,40,0.97); backdrop-filter: blur(20px); z-index: 1050; transition: right 0.4s cubic-bezier(0.22,1,0.36,1); padding: 100px 40px 40px; overflow-y: auto; border-left: 1px solid rgba(0,168,255,0.15); }
+.mobile-nav.open { right: 0; }
+.mobile-nav a { display: block; padding: 14px 0; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.05em; color: #c0cfe0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.3s ease, padding-left 0.3s ease; }
+.mobile-nav a:hover { color: #00a8ff; padding-left: 8px; }
+.mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1040; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
+.mobile-overlay.show { opacity: 1; visibility: visible; }
+
+.page-hero { position: relative; width: 100%; height: 50vh; min-height: 320px; overflow: hidden; }
+.page-hero img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); animation: heroZoom 8s ease-in-out infinite alternate; }
+@keyframes heroZoom { 0% { transform: scale(1.03); } 100% { transform: scale(1.08); } }
+.page-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(10,22,40,0.3) 0%, rgba(10,22,40,0.15) 40%, rgba(10,22,40,0.7) 80%, rgba(10,22,40,1) 100%); z-index: 2; }
+.page-hero-title { position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); text-align: center; z-index: 3; }
+.page-hero-title h1 { font-size: clamp(1.5rem,4vw,2.5rem); font-weight: 700; letter-spacing: 0.15em; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.page-hero-title h1 span { display: inline-block; border-bottom: 2px solid rgba(0,168,255,0.7); padding-bottom: 10px; }
+.page-hero-title .page-hero-en { font-size: 0.85rem; color: #00a8ff; letter-spacing: 0.2em; margin-top: 12px; font-weight: 400; }
+
+.content-section { padding: 80px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* WORKS CARDS */
+.works-list { display: flex; flex-direction: column; gap: 40px; }
+.works-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 40px; backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.works-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,168,255,0.1), 0 0 0 1px rgba(0,168,255,0.2);
+}
+.works-card-num {
+  font-size: 0.75rem; color: #00a8ff; letter-spacing: 0.2em; font-weight: 500; margin-bottom: 8px;
+}
+.works-card h2 {
+  font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 24px;
+  padding-bottom: 16px; border-bottom: 1px solid rgba(0,168,255,0.2); letter-spacing: 0.05em;
+}
+.works-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.works-detail-block h3 {
+  font-size: 0.85rem; color: #00a8ff; font-weight: 500; letter-spacing: 0.1em;
+  margin-bottom: 12px; padding-left: 14px; border-left: 3px solid #00a8ff;
+}
+.works-detail-block p { font-size: 0.9rem; color: #a0b0c8; line-height: 2; }
+
+.footer { background: #060e1a; border-top: 1px solid rgba(255,255,255,0.05); padding: 60px 0 30px; }
+.footer-inner { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.footer-logo img { height: 40px; width: auto; opacity: 0.85; transition: opacity 0.3s ease; }
+.footer-logo:hover img { opacity: 1; }
+.footer-address { text-align: center; font-size: 0.85rem; color: #6a7d96; letter-spacing: 0.05em; line-height: 2; }
+.footer-twitter { display: inline-block; transition: transform 0.3s ease, opacity 0.3s ease; }
+.footer-twitter img { width: 30px; height: 30px; }
+.footer-twitter:hover { transform: scale(1.15); opacity: 0.8; }
+.footer-copyright { font-size: 0.75rem; color: #3a4d66; letter-spacing: 0.08em; margin-top: 20px; text-align: center; }
+.back-to-top { display: inline-block; margin-top: 24px; padding: 10px 28px; font-size: 0.85rem; color: #00a8ff; border: 1px solid rgba(0,168,255,0.3); border-radius: 30px; transition: background 0.3s ease, color 0.3s ease; letter-spacing: 0.08em; }
+.back-to-top:hover { background: #00a8ff; color: #0a1628; }
+
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1024px) { .header { padding: 0 24px; } }
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .header-twitter { display: none; }
+  .header { padding: 0 16px; height: 64px; }
+  .header-logo img { height: 36px; }
+  .page-hero { min-height: 260px; height: 40vh; }
+  .content-section { padding: 50px 0; }
+  .works-card { padding: 28px 20px; }
+  .works-detail { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 480px) { .container { padding: 0 16px; } .footer-address { font-size: 0.8rem; } }
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <a href="pattern-a.html" class="header-logo"><img src="image/header_logo.png" alt="TECHNICAL THINK"></a>
+  <div class="header-right">
+    <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="header-twitter"><img src="image/twitter.png" alt="Twitter"></a>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="pattern-a.html">トップページ</a>
+  <a href="a-about.html">会社概要</a>
+  <a href="a-president.html">会長・代表者挨拶</a>
+  <a href="a-philosophy.html">企業理念</a>
+  <a href="a-history.html">沿革</a>
+  <a href="a-works.html">業務内容</a>
+  <a href="a-office.html">オフィス探訪</a>
+  <a href="a-recruit.html">採用情報</a>
+  <a href="a-staff.html">スタッフ紹介</a>
+</nav>
+
+<section class="page-hero">
+  <img src="image/about_mv.png" alt="業務内容">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-title">
+    <h1><span>業務内容</span></h1>
+    <p class="page-hero-en">SERVICES</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <div class="works-list">
+
+      <div class="works-card fade-in">
+        <p class="works-card-num">SERVICE 01</p>
+        <h2>各種解析・検討業務</h2>
+        <div class="works-detail">
+          <div class="works-detail-block">
+            <h3>解析</h3>
+            <p>斜面安定解析、各種構成式を用いた地盤変形解析（圧密沈下解析、FEM解析等）、動的変化解析（液状化を含む地震応答解析）、フレーム解析、温度応力解析等</p>
+          </div>
+          <div class="works-detail-block">
+            <h3>検討</h3>
+            <p>斜面安定検討、脆弱地盤の圧密変形検討、地盤・構造物の安定検討、近接構造物影響検討、マスコン温度応力検討、構造物応力検討等</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="works-card fade-in">
+        <p class="works-card-num">SERVICE 02</p>
+        <h2>設計支援および設計精査業務</h2>
+        <div class="works-detail">
+          <div class="works-detail-block">
+            <h3>設計・設計支援</h3>
+            <p>山留、河川、トンネル、道路、港湾等の各種構造物の設計支援</p>
+          </div>
+          <div class="works-detail-block">
+            <h3>設計精査</h3>
+            <p>設計図面・数量および設計計算書の精査・照査</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="works-card fade-in">
+        <p class="works-card-num">SERVICE 03</p>
+        <h2>構造物調査および補修・補強設計業務</h2>
+        <div class="works-detail">
+          <div class="works-detail-block">
+            <h3>構造物調査</h3>
+            <p>既設構造物（鋼・コンクリート）の健全度調査（橋梁・トンネル・上下水道施設耐震劣化診断）、橋梁の載荷試験、鉄筋の現状応力等応力調査</p>
+          </div>
+          <div class="works-detail-block">
+            <h3>補修・補強設計</h3>
+            <p>補修・補強の必要性判定および補修・補強設計</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="works-card fade-in">
+        <p class="works-card-num">SERVICE 04</p>
+        <h2>計測および環境調査</h2>
+        <div class="works-detail">
+          <div class="works-detail-block">
+            <h3>計測</h3>
+            <p>計測計画立案、計測機器設置、施工中の計測管理、とりまとめ等、計測管理に伴う各種解析・検討</p>
+          </div>
+          <div class="works-detail-block">
+            <h3>環境調査</h3>
+            <p>騒音、振動等調査</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="works-card fade-in">
+        <p class="works-card-num">SERVICE 05</p>
+        <h2>非破壊検査・解析</h2>
+        <div class="works-detail">
+          <div class="works-detail-block">
+            <h3>検査</h3>
+            <p>赤外線サーモグラフィーによるコンクリート構造物診断、応力の視覚化、疲労寿命の検討等</p>
+          </div>
+          <div class="works-detail-block">
+            <h3>解析</h3>
+            <p>画像入力・処理モジュールの開発、画像処理アルゴリズム開発、非接触三次元計測装置の開発</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="pattern-a.html" class="footer-logo"><img src="image/footer_logo.png" alt="TECHNICAL THINK"></a>
+      <div class="footer-address">〒661-0953 兵庫県尼崎市東園田町9丁目16番8号<br>TEL.06-6430-9174</div>
+      <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="footer-twitter"><img src="image/twitter.png" alt="Twitter"></a>
+      <a href="pattern-a.html" class="back-to-top">トップページへ戻る</a>
+      <p class="footer-copyright">Copyright&copy; TECHNICAL THINK Co., Ltd.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var h=document.getElementById('header');window.addEventListener('scroll',function(){h.classList.toggle('scrolled',window.scrollY>80)},{passive:true})})();
+(function(){var b=document.getElementById('hamburger'),n=document.getElementById('mobileNav'),o=document.getElementById('mobileOverlay');function t(){b.classList.toggle('active');n.classList.toggle('open');o.classList.toggle('show');document.body.style.overflow=n.classList.contains('open')?'hidden':''}function c(){b.classList.remove('active');n.classList.remove('open');o.classList.remove('show');document.body.style.overflow=''}b.addEventListener('click',t);o.addEventListener('click',c);n.querySelectorAll('a').forEach(function(l){l.addEventListener('click',c)})})();
+(function(){var els=document.querySelectorAll('.fade-in');if(!els.length)return;var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});els.forEach(function(el){obs.observe(el)})})();
+</script>
+</body>
+</html>

@@ -307,69 +307,75 @@ img { max-width: 100%; height: auto; display: block; }
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  aspect-ratio: 3 / 4;
+  display: block;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .menu-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(0, 168, 255, 0.15), 0 0 0 1px rgba(0, 168, 255, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 24px 60px rgba(0, 168, 255, 0.2), 0 0 0 1px rgba(0, 168, 255, 0.3);
 }
 .menu-card-img {
-  position: relative;
-  aspect-ratio: 4 / 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 .menu-card-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.4s ease;
 }
 .menu-card:hover .menu-card-img img {
   transform: scale(1.08);
 }
-.menu-card-img::after {
-  content: '';
+.menu-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 2;
+  transition: background 0.4s ease;
+}
+.menu-card:hover .menu-card-overlay {
+  background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+}
+.menu-card-body {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60%;
-  background: linear-gradient(to top, rgba(10, 22, 40, 0.85), transparent);
-}
-.menu-card-body {
-  padding: 18px 16px;
-  text-align: center;
-  position: relative;
+  padding: 24px 18px;
+  z-index: 3;
+  text-align: left;
 }
 .menu-card-body h3 {
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: #e0e6ef;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
+  margin-bottom: 4px;
   transition: color 0.3s ease;
 }
 .menu-card:hover .menu-card-body h3 {
   color: #00a8ff;
 }
-.menu-card-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 2px;
-  background: #00a8ff;
-  opacity: 0;
-  transition: opacity 0.3s ease, width 0.3s ease;
+.menu-card-body .menu-card-sub {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  transition: color 0.3s ease;
 }
-.menu-card:hover .menu-card-body::before {
-  opacity: 1;
-  width: 50px;
+.menu-card:hover .menu-card-body .menu-card-sub {
+  color: rgba(0, 168, 255, 0.7);
 }
 
 /* ===== NEWS SECTION ===== */
@@ -529,8 +535,8 @@ img { max-width: 100%; height: auto; display: block; }
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
-  .menu-card-body { padding: 14px 12px; }
-  .menu-card-body h3 { font-size: 0.85rem; }
+  .menu-card-body { padding: 18px 14px; }
+  .menu-card-body h3 { font-size: 0.95rem; }
   .section-title { margin-bottom: 40px; }
 }
 
@@ -552,7 +558,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 <!-- ===== HEADER ===== -->
 <header class="header" id="header">
-  <a href="http://technicalthink.jp/index.html" class="header-logo">
+  <a href="pattern-a.html" class="header-logo">
     <img src="image/header_logo.png" alt="TECHNICAL THINK">
   </a>
   <div class="header-right">
@@ -572,16 +578,16 @@ img { max-width: 100%; height: auto; display: block; }
 
 <!-- Mobile Navigation -->
 <nav class="mobile-nav" id="mobileNav">
-  <a href="http://technicalthink.jp/index.html">トップページ</a>
-  <a href="http://technicalthink.jp/about.html">会社概要</a>
-  <a href="http://technicalthink.jp/president.html">会長・代表者挨拶</a>
-  <a href="http://technicalthink.jp/philosophy.html">企業理念</a>
-  <a href="http://technicalthink.jp/history.html">沿革</a>
+  <a href="pattern-a.html">トップページ</a>
+  <a href="a-about.html">会社概要</a>
+  <a href="a-president.html">会長・代表者挨拶</a>
+  <a href="a-philosophy.html">企業理念</a>
+  <a href="a-history.html">沿革</a>
   <a href="http://technicalthink.jp/pdf/achievement.pdf">実績・主要取引先</a>
-  <a href="http://technicalthink.jp/works.html">業務内容</a>
-  <a href="http://technicalthink.jp/office.html">オフィス探訪</a>
-  <a href="http://technicalthink.jp/recruit.html">採用情報</a>
-  <a href="http://technicalthink.jp/staff.html">スタッフ紹介</a>
+  <a href="a-works.html">業務内容</a>
+  <a href="a-office.html">オフィス探訪</a>
+  <a href="a-recruit.html">採用情報</a>
+  <a href="a-staff.html">スタッフ紹介</a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -611,44 +617,54 @@ img { max-width: 100%; height: auto; display: block; }
 <section class="section menu-section">
   <div class="container">
     <div class="menu-grid">
-      <a href="http://technicalthink.jp/about.html" class="menu-card fade-in fade-in-delay-1">
+      <a href="a-about.html" class="menu-card fade-in fade-in-delay-1">
         <div class="menu-card-img">
-          <img src="image/top_menu01b.jpg" alt="会社概要">
+          <img src="image/about_mv.png" alt="会社概要">
         </div>
+        <div class="menu-card-overlay"></div>
         <div class="menu-card-body">
           <h3>会社概要</h3>
+          <span class="menu-card-sub">ABOUT US</span>
         </div>
       </a>
-      <a href="http://technicalthink.jp/works.html" class="menu-card fade-in fade-in-delay-2">
+      <a href="a-works.html" class="menu-card fade-in fade-in-delay-2">
         <div class="menu-card-img">
-          <img src="image/top_menu02b.jpg" alt="業務内容">
+          <img src="image/top_mv02.jpg" alt="業務内容">
         </div>
+        <div class="menu-card-overlay"></div>
         <div class="menu-card-body">
           <h3>業務内容</h3>
+          <span class="menu-card-sub">SERVICES</span>
         </div>
       </a>
-      <a href="http://technicalthink.jp/office.html" class="menu-card fade-in fade-in-delay-3">
+      <a href="a-office.html" class="menu-card fade-in fade-in-delay-3">
         <div class="menu-card-img">
-          <img src="image/top_menu03b.jpg" alt="オフィス探訪">
+          <img src="image/office_img01.jpg" alt="オフィス探訪">
         </div>
+        <div class="menu-card-overlay"></div>
         <div class="menu-card-body">
           <h3>オフィス探訪</h3>
+          <span class="menu-card-sub">OFFICE</span>
         </div>
       </a>
-      <a href="http://technicalthink.jp/recruit.html" class="menu-card fade-in fade-in-delay-4">
+      <a href="a-recruit.html" class="menu-card fade-in fade-in-delay-4">
         <div class="menu-card-img">
-          <img src="image/top_menu04b.jpg" alt="採用情報">
+          <img src="image/recruit_mv.jpg" alt="採用情報">
         </div>
+        <div class="menu-card-overlay"></div>
         <div class="menu-card-body">
           <h3>採用情報</h3>
+          <span class="menu-card-sub">RECRUIT</span>
         </div>
       </a>
-      <a href="http://technicalthink.jp/staff.html" class="menu-card fade-in fade-in-delay-5">
+      <a href="a-staff.html" class="menu-card fade-in fade-in-delay-5">
         <div class="menu-card-img">
-          <img src="image/top_menu05b.jpg" alt="スタッフ紹介">
+          <img src="image/staff01.jpg" alt="スタッフ紹介">
         </div>
+        <div class="menu-card-overlay"></div>
         <div class="menu-card-body">
           <h3>スタッフ紹介</h3>
+          <span class="menu-card-sub">STAFF</span>
         </div>
       </a>
     </div>
@@ -678,7 +694,7 @@ img { max-width: 100%; height: auto; display: block; }
 <footer class="footer">
   <div class="container">
     <div class="footer-inner">
-      <a href="http://technicalthink.jp/index.html" class="footer-logo">
+      <a href="pattern-a.html" class="footer-logo">
         <img src="image/footer_logo.png" alt="TECHNICAL THINK">
       </a>
       <div class="footer-address">

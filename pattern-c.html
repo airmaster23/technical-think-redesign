@@ -302,72 +302,80 @@ ul { list-style: none; }
 }
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
   perspective: 1200px;
 }
 .menu-card {
   position: relative;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
-  border: 1px solid rgba(0, 229, 255, 0.08);
-  background: #111;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  background: #1a1a1a;
 }
 .menu-card:hover {
-  transform: perspective(800px) rotateY(-5deg) rotateX(3deg) translateY(-8px);
+  transform: perspective(800px) rotateY(-4deg) rotateX(2deg) translateY(-10px);
   box-shadow:
-    0 0 15px rgba(0, 229, 255, 0.4),
-    0 0 40px rgba(0, 229, 255, 0.15),
-    0 20px 40px rgba(0, 0, 0, 0.5);
-  border-color: #00e5ff;
+    0 0 20px rgba(0, 229, 255, 0.3),
+    0 0 50px rgba(0, 229, 255, 0.12),
+    0 25px 50px rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 229, 255, 0.7);
 }
 .menu-card a {
   display: block;
-}
-.menu-card-img {
-  width: 100%;
-  aspect-ratio: 16/10;
-  object-fit: cover;
-  filter: grayscale(30%) brightness(0.85);
-  transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.menu-card:hover .menu-card-img {
-  filter: grayscale(0%) brightness(1);
-  transform: scale(1.05);
-}
-.menu-card-body {
-  padding: 18px 16px;
-  position: relative;
-}
-.menu-card-title {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #fff;
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.menu-card:hover .menu-card-title {
-  color: #00e5ff;
-}
-.menu-card-arrow {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%) translateX(0);
-  color: #00e5ff;
-  font-size: 20px;
-  opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.menu-card:hover .menu-card-arrow {
-  opacity: 1;
-  transform: translateY(-50%) translateX(4px);
+  text-decoration: none;
+  color: inherit;
 }
 .menu-card-img-wrap {
   overflow: hidden;
+  height: 200px;
+}
+.menu-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  filter: saturate(0.6) brightness(0.85);
+  transition: filter 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-card:hover .menu-card-img {
+  filter: saturate(1) brightness(1);
+  transform: scale(1.08);
+}
+.menu-card-body {
+  padding: 20px 18px 24px;
+  position: relative;
+}
+.menu-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fff;
+  display: block;
+  margin-bottom: 4px;
+}
+.menu-card-subtitle {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #00e5ff;
+  text-transform: uppercase;
+  display: block;
+}
+.menu-card-accent {
+  display: block;
+  margin-top: 14px;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #00e5ff, #0080ff, transparent);
+  border-radius: 2px;
+  opacity: 0.5;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-card:hover .menu-card-accent {
+  opacity: 1;
 }
 
 /* ===== NEWS SECTION ===== */
@@ -543,6 +551,10 @@ ul { list-style: none; }
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+  .menu-card-img-wrap,
+  .menu-card-img {
+    height: 180px;
+  }
 }
 @media (max-width: 768px) {
   .hamburger { display: flex; }
@@ -555,6 +567,10 @@ ul { list-style: none; }
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+  .menu-card-img-wrap,
+  .menu-card-img {
+    height: 170px;
+  }
   .menu-section { padding: 60px 16px 80px; }
   .news-section { padding: 60px 16px 80px; }
   .news-accordion-body-inner { padding-left: 20px; }
@@ -565,6 +581,10 @@ ul { list-style: none; }
   .menu-grid {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+  .menu-card-img-wrap,
+  .menu-card-img {
+    height: 200px;
   }
   .hero-content { left: 5%; bottom: 18%; }
   .menu-card:hover {
@@ -588,7 +608,7 @@ ul { list-style: none; }
 
 <!-- ===== HEADER ===== -->
 <header class="site-header" id="siteHeader">
-  <a href="http://technicalthink.jp/index.html" class="header-logo">
+  <a href="pattern-c.html" class="header-logo">
     <img src="image/header_logo.png" alt="TECHNICAL THINK">
   </a>
   <div class="header-right">
@@ -604,16 +624,16 @@ ul { list-style: none; }
 <!-- ===== SLIDE MENU ===== -->
 <div class="menu-overlay" id="menuOverlay"></div>
 <nav class="slide-menu" id="slideMenu">
-  <a href="http://technicalthink.jp/index.html">トップページ</a>
-  <a href="http://technicalthink.jp/about.html">会社概要</a>
-  <a href="http://technicalthink.jp/president.html">会長・代表者挨拶</a>
-  <a href="http://technicalthink.jp/philosophy.html">企業理念</a>
-  <a href="http://technicalthink.jp/history.html">沿革</a>
+  <a href="pattern-c.html">トップページ</a>
+  <a href="c-about.html">会社概要</a>
+  <a href="c-president.html">会長・代表者挨拶</a>
+  <a href="c-philosophy.html">企業理念</a>
+  <a href="c-history.html">沿革</a>
   <a href="http://technicalthink.jp/pdf/achievement.pdf">実績・主要取引先</a>
-  <a href="http://technicalthink.jp/works.html">業務内容</a>
-  <a href="http://technicalthink.jp/office.html">オフィス探訪</a>
-  <a href="http://technicalthink.jp/recruit.html">採用情報</a>
-  <a href="http://technicalthink.jp/staff.html">スタッフ紹介</a>
+  <a href="c-works.html">業務内容</a>
+  <a href="c-office.html">オフィス探訪</a>
+  <a href="c-recruit.html">採用情報</a>
+  <a href="c-staff.html">スタッフ紹介</a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -644,57 +664,62 @@ ul { list-style: none; }
   <div class="section-inner">
     <div class="menu-grid">
       <div class="menu-card fade-up">
-        <a href="http://technicalthink.jp/about.html">
+        <a href="c-about.html">
           <div class="menu-card-img-wrap">
-            <img class="menu-card-img" src="image/top_menu01b.jpg" alt="会社概要">
+            <img class="menu-card-img" src="image/about_mv.png" alt="会社概要">
           </div>
           <div class="menu-card-body">
             <span class="menu-card-title">会社概要</span>
-            <span class="menu-card-arrow">→</span>
+            <span class="menu-card-subtitle">ABOUT US</span>
+            <span class="menu-card-accent"></span>
           </div>
         </a>
       </div>
       <div class="menu-card fade-up">
-        <a href="http://technicalthink.jp/works.html">
+        <a href="c-works.html">
           <div class="menu-card-img-wrap">
-            <img class="menu-card-img" src="image/top_menu02b.jpg" alt="業務内容">
+            <img class="menu-card-img" src="image/top_mv02.jpg" alt="業務内容">
           </div>
           <div class="menu-card-body">
             <span class="menu-card-title">業務内容</span>
-            <span class="menu-card-arrow">→</span>
+            <span class="menu-card-subtitle">SERVICES</span>
+            <span class="menu-card-accent"></span>
           </div>
         </a>
       </div>
       <div class="menu-card fade-up">
-        <a href="http://technicalthink.jp/office.html">
+        <a href="c-office.html">
           <div class="menu-card-img-wrap">
-            <img class="menu-card-img" src="image/top_menu03b.jpg" alt="オフィス探訪">
+            <img class="menu-card-img" src="image/office_img01.jpg" alt="オフィス探訪">
           </div>
           <div class="menu-card-body">
             <span class="menu-card-title">オフィス探訪</span>
-            <span class="menu-card-arrow">→</span>
+            <span class="menu-card-subtitle">OFFICE</span>
+            <span class="menu-card-accent"></span>
           </div>
         </a>
       </div>
       <div class="menu-card fade-up">
-        <a href="http://technicalthink.jp/recruit.html">
+        <a href="c-recruit.html">
           <div class="menu-card-img-wrap">
-            <img class="menu-card-img" src="image/top_menu04b.jpg" alt="採用情報">
+            <img class="menu-card-img" src="image/recruit_mv.jpg" alt="採用情報">
           </div>
           <div class="menu-card-body">
             <span class="menu-card-title">採用情報</span>
-            <span class="menu-card-arrow">→</span>
+            <span class="menu-card-subtitle">RECRUIT</span>
+            <span class="menu-card-accent"></span>
           </div>
         </a>
       </div>
       <div class="menu-card fade-up">
-        <a href="http://technicalthink.jp/staff.html">
+        <a href="c-staff.html">
           <div class="menu-card-img-wrap">
-            <img class="menu-card-img" src="image/top_menu05b.jpg" alt="スタッフ紹介">
+            <img class="menu-card-img" src="image/staff01.jpg" alt="スタッフ紹介">
           </div>
           <div class="menu-card-body">
             <span class="menu-card-title">スタッフ紹介</span>
-            <span class="menu-card-arrow">→</span>
+            <span class="menu-card-subtitle">STAFF</span>
+            <span class="menu-card-accent"></span>
           </div>
         </a>
       </div>

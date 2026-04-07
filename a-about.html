@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会社概要 | 株式会社テクニカル・シンク</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #0a1628;
+  color: #e0e6ef;
+  line-height: 1.8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; transition: color 0.3s ease; }
+ul { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* HEADER */
+.header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  padding: 0 40px; height: 80px; display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.4s ease, box-shadow 0.4s ease; background: transparent;
+}
+.header.scrolled {
+  background: rgba(10, 22, 40, 0.95);
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.header-logo img { height: 45px; width: auto; transition: opacity 0.3s ease; }
+.header-logo:hover img { opacity: 0.8; }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.header-twitter img { width: 28px; height: 28px; transition: transform 0.3s ease, opacity 0.3s ease; }
+.header-twitter:hover img { transform: scale(1.15); opacity: 0.8; }
+
+.hamburger {
+  display: none; flex-direction: column; justify-content: center; align-items: center;
+  width: 44px; height: 44px; cursor: pointer; z-index: 1100; background: none; border: none; padding: 0;
+}
+.hamburger span {
+  display: block; width: 26px; height: 2px; background: #fff;
+  transition: transform 0.35s ease, opacity 0.35s ease; margin: 4px 0; border-radius: 2px;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+
+.mobile-nav {
+  position: fixed; top: 0; right: -320px; width: 320px; max-width: 85vw; height: 100vh;
+  background: rgba(10, 22, 40, 0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  z-index: 1050; transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 100px 40px 40px; overflow-y: auto; border-left: 1px solid rgba(0, 168, 255, 0.15);
+}
+.mobile-nav.open { right: 0; }
+.mobile-nav a {
+  display: block; padding: 14px 0; font-size: 0.95rem; font-weight: 400;
+  letter-spacing: 0.05em; color: #c0cfe0; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: color 0.3s ease, padding-left 0.3s ease;
+}
+.mobile-nav a:hover { color: #00a8ff; padding-left: 8px; }
+.mobile-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6); z-index: 1040; opacity: 0; visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.mobile-overlay.show { opacity: 1; visibility: visible; }
+
+/* PAGE HERO */
+.page-hero {
+  position: relative; width: 100%; height: 50vh; min-height: 320px; overflow: hidden;
+}
+.page-hero img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.03); animation: heroZoom 8s ease-in-out infinite alternate;
+}
+@keyframes heroZoom { 0% { transform: scale(1.03); } 100% { transform: scale(1.08); } }
+.page-hero-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(10,22,40,0.3) 0%, rgba(10,22,40,0.15) 40%, rgba(10,22,40,0.7) 80%, rgba(10,22,40,1) 100%);
+  z-index: 2;
+}
+.page-hero-title {
+  position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+  text-align: center; z-index: 3;
+}
+.page-hero-title h1 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: 0.15em; color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.page-hero-title h1 span {
+  display: inline-block; border-bottom: 2px solid rgba(0, 168, 255, 0.7); padding-bottom: 10px;
+}
+.page-hero-title .page-hero-en {
+  font-size: 0.85rem; color: #00a8ff; letter-spacing: 0.2em; margin-top: 12px; font-weight: 400;
+}
+
+/* CONTENT LAYOUT */
+.content-section { padding: 80px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.content-wrapper { display: flex; gap: 50px; }
+.main-content { flex: 1; min-width: 0; }
+.sidebar { width: 260px; flex-shrink: 0; }
+
+/* SIDEBAR */
+.sidebar-nav {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 30px 24px;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  position: sticky; top: 100px;
+}
+.sidebar-nav h3 {
+  font-size: 0.85rem; color: #00a8ff; letter-spacing: 0.15em; margin-bottom: 20px;
+  padding-bottom: 12px; border-bottom: 1px solid rgba(0,168,255,0.2); font-weight: 500;
+}
+.sidebar-nav a {
+  display: block; padding: 12px 0; font-size: 0.9rem; color: #8a9bb5;
+  border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 0.3s ease, padding-left 0.3s ease;
+}
+.sidebar-nav a:hover, .sidebar-nav a.active { color: #00a8ff; padding-left: 8px; }
+.sidebar-nav a.active { font-weight: 500; }
+
+/* GLASS TABLE */
+.info-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; overflow: hidden;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.info-table tr { transition: background 0.3s ease; }
+.info-table tr:hover { background: rgba(0,168,255,0.04); }
+.info-table th, .info-table td {
+  padding: 18px 24px; text-align: left; font-size: 0.92rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.info-table tr:last-child th, .info-table tr:last-child td { border-bottom: none; }
+.info-table th {
+  width: 200px; color: #00a8ff; font-weight: 500; letter-spacing: 0.05em;
+  background: rgba(0,168,255,0.05); white-space: nowrap; vertical-align: top;
+}
+.info-table td { color: #c0cfe0; line-height: 1.9; }
+
+/* MAP */
+.map-container {
+  margin-top: 50px; border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.map-container iframe { width: 100%; height: 400px; border: 0; display: block; }
+
+/* FOOTER */
+.footer {
+  background: #060e1a; border-top: 1px solid rgba(255,255,255,0.05); padding: 60px 0 30px;
+}
+.footer-inner { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.footer-logo img { height: 40px; width: auto; opacity: 0.85; transition: opacity 0.3s ease; }
+.footer-logo:hover img { opacity: 1; }
+.footer-address { text-align: center; font-size: 0.85rem; color: #6a7d96; letter-spacing: 0.05em; line-height: 2; }
+.footer-twitter { display: inline-block; transition: transform 0.3s ease, opacity 0.3s ease; }
+.footer-twitter img { width: 30px; height: 30px; }
+.footer-twitter:hover { transform: scale(1.15); opacity: 0.8; }
+.footer-copyright { font-size: 0.75rem; color: #3a4d66; letter-spacing: 0.08em; margin-top: 20px; text-align: center; }
+.back-to-top {
+  display: inline-block; margin-top: 24px; padding: 10px 28px; font-size: 0.85rem;
+  color: #00a8ff; border: 1px solid rgba(0,168,255,0.3); border-radius: 30px;
+  transition: background 0.3s ease, color 0.3s ease; letter-spacing: 0.08em;
+}
+.back-to-top:hover { background: #00a8ff; color: #0a1628; }
+
+/* ANIMATIONS */
+.fade-in {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .header { padding: 0 24px; }
+  .content-wrapper { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .sidebar-nav { position: static; }
+}
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .header-twitter { display: none; }
+  .header { padding: 0 16px; height: 64px; }
+  .header-logo img { height: 36px; }
+  .page-hero { min-height: 260px; height: 40vh; }
+  .content-section { padding: 50px 0; }
+  .info-table th, .info-table td { padding: 14px 16px; font-size: 0.85rem; }
+  .info-table th { width: 130px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .info-table th, .info-table td { display: block; width: 100%; }
+  .info-table th { padding-bottom: 4px; border-bottom: none; }
+  .info-table td { padding-top: 4px; }
+  .footer-address { font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <a href="pattern-a.html" class="header-logo"><img src="image/header_logo.png" alt="TECHNICAL THINK"></a>
+  <div class="header-right">
+    <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="header-twitter"><img src="image/twitter.png" alt="Twitter"></a>
+    <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="pattern-a.html">トップページ</a>
+  <a href="a-about.html">会社概要</a>
+  <a href="a-president.html">会長・代表者挨拶</a>
+  <a href="a-philosophy.html">企業理念</a>
+  <a href="a-history.html">沿革</a>
+  <a href="a-works.html">業務内容</a>
+  <a href="a-office.html">オフィス探訪</a>
+  <a href="a-recruit.html">採用情報</a>
+  <a href="a-staff.html">スタッフ紹介</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img src="image/about_mv.png" alt="会社概要">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-title">
+    <h1><span>会社概要</span></h1>
+    <p class="page-hero-en">ABOUT US</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="content-section">
+  <div class="container">
+    <div class="content-wrapper">
+      <div class="main-content">
+        <table class="info-table fade-in">
+          <tr><th>会社名</th><td>株式会社テクニカル・シンク（TECHNICAL THINK CORPORATION）</td></tr>
+          <tr><th>代表取締役社長</th><td>寺岡 國仁</td></tr>
+          <tr><th>本社所在地</th><td>〒661-0953 兵庫県尼崎市東園田町9丁目16番8号</td></tr>
+          <tr><th>本社TEL</th><td>06-6430-9174</td></tr>
+          <tr><th>本社FAX</th><td>06-6430-9175</td></tr>
+          <tr><th>創立</th><td>2006年10月20日</td></tr>
+          <tr><th>資本金</th><td>1,500万円</td></tr>
+          <tr><th>事業年度</th><td>毎年10月1日から翌年9月30日迄</td></tr>
+          <tr><th>主な事業内容</th><td>各種解析・検討業務、設計支援および設計精査業務、構造物調査および補修・補強設計業務、計測および環境調査業務、非破壊検査</td></tr>
+          <tr><th>建設業許可</th><td>兵庫県知事 許可（般－4）第218559号</td></tr>
+          <tr><th>従業員数</th><td>12名</td></tr>
+          <tr><th>有資格者</th><td>技術士（建設部門）1名、RCCM 1名、1級土木施工管理技士4名、測量士3名、コンクリート診断士2名、道路橋点検士5名、安全衛生責任者3名</td></tr>
+        </table>
+
+        <div class="map-container fade-in">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d409.76884331828!2d135.4472409866133!3d34.75179526648695!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000ef006a1f07bb%3A0xf25a7aa174d08719!2z5qCq5byP5Lya56S-44OG44Kv44OL44Kr44Or44O744K344Oz44Kv!5e0!3m2!1sja!2sjp!4v1738203961299!5m2!1sja!2sjp" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <nav class="sidebar-nav fade-in">
+          <h3>ABOUT</h3>
+          <a href="a-about.html" class="active">会社概要</a>
+          <a href="a-president.html">会長・代表者挨拶</a>
+          <a href="a-philosophy.html">企業理念</a>
+          <a href="a-history.html">沿革</a>
+        </nav>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="pattern-a.html" class="footer-logo"><img src="image/footer_logo.png" alt="TECHNICAL THINK"></a>
+      <div class="footer-address">〒661-0953 兵庫県尼崎市東園田町9丁目16番8号<br>TEL.06-6430-9174</div>
+      <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="footer-twitter"><img src="image/twitter.png" alt="Twitter"></a>
+      <a href="pattern-a.html" class="back-to-top">トップページへ戻る</a>
+      <p class="footer-copyright">Copyright&copy; TECHNICAL THINK Co., Ltd.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var h=document.getElementById('header');window.addEventListener('scroll',function(){h.classList.toggle('scrolled',window.scrollY>80)},{passive:true})})();
+(function(){var b=document.getElementById('hamburger'),n=document.getElementById('mobileNav'),o=document.getElementById('mobileOverlay');function t(){b.classList.toggle('active');n.classList.toggle('open');o.classList.toggle('show');document.body.style.overflow=n.classList.contains('open')?'hidden':''}function c(){b.classList.remove('active');n.classList.remove('open');o.classList.remove('show');document.body.style.overflow=''}b.addEventListener('click',t);o.addEventListener('click',c);n.querySelectorAll('a').forEach(function(l){l.addEventListener('click',c)})})();
+(function(){var els=document.querySelectorAll('.fade-in');if(!els.length)return;var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});els.forEach(function(el){obs.observe(el)})})();
+</script>
+</body>
+</html>

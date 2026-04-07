@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会社概要 | 株式会社テクニカル・シンク</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Noto Sans JP', sans-serif; font-weight: 400; color: #333; background: #fff; line-height: 1.8; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; transition: color 0.3s ease, opacity 0.3s ease; }
+ul { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* HEADER */
+.header { position: fixed; top: 0; left: 0; width: 100%; height: 80px; background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.06); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
+.header-logo img { height: 40px; width: auto; }
+.header-nav { display: flex; align-items: center; gap: 8px; }
+.header-nav a { font-size: 0.8rem; font-weight: 500; color: #444; padding: 8px 12px; border-radius: 4px; transition: all 0.3s ease; white-space: nowrap; }
+.header-nav a:hover { color: #0066cc; background: rgba(0,102,204,0.05); }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-twitter img { height: 24px; width: 24px; transition: opacity 0.3s ease; }
+.header-twitter:hover img { opacity: 0.7; }
+
+/* Hamburger */
+.hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; width: 44px; height: 44px; cursor: pointer; background: none; border: none; gap: 6px; z-index: 1100; }
+.hamburger span { display: block; width: 24px; height: 2px; background: #333; border-radius: 2px; transition: all 0.3s ease; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+/* Mobile Menu */
+.mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+.mobile-overlay.active { opacity: 1; visibility: visible; }
+.mobile-menu { position: fixed; top: 0; right: -320px; width: 300px; max-width: 85vw; height: 100%; background: #fff; z-index: 1060; padding: 100px 30px 40px; overflow-y: auto; transition: right 0.4s cubic-bezier(0.22,1,0.36,1); box-shadow: -4px 0 30px rgba(0,0,0,0.1); }
+.mobile-menu.active { right: 0; }
+.mobile-menu a { display: block; padding: 14px 0; font-size: 0.95rem; font-weight: 500; color: #333; border-bottom: 1px solid #eee; transition: all 0.3s ease; }
+.mobile-menu a:first-child { border-top: 1px solid #eee; }
+.mobile-menu a:hover { color: #0066cc; padding-left: 8px; }
+
+/* HERO */
+.page-hero { position: relative; width: 100%; height: 320px; margin-top: 80px; overflow: hidden; }
+.page-hero img { width: 100%; height: 100%; object-fit: cover; }
+.page-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,40,80,0.5) 0%, rgba(0,80,160,0.3) 100%); display: flex; align-items: center; justify-content: center; }
+.page-hero-title { color: #fff; font-size: 2.4rem; font-weight: 700; letter-spacing: 0.1em; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+
+/* BREADCRUMB */
+.breadcrumb { background: #f8f9fa; padding: 14px 40px; font-size: 0.85rem; color: #666; }
+.breadcrumb a { color: #0066cc; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* LAYOUT */
+.content-wrapper { display: flex; max-width: 1200px; margin: 60px auto; padding: 0 40px; gap: 40px; }
+.main-content { flex: 1; min-width: 0; }
+.sidebar { width: 260px; flex-shrink: 0; }
+
+/* SIDEBAR */
+.sidebar-nav { background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); overflow: hidden; position: sticky; top: 100px; }
+.sidebar-nav-title { background: linear-gradient(135deg, #0066cc, #0099ff); color: #fff; font-size: 0.95rem; font-weight: 700; padding: 16px 20px; }
+.sidebar-nav a { display: block; padding: 14px 20px; font-size: 0.9rem; color: #444; border-bottom: 1px solid #f0f0f0; transition: all 0.3s ease; }
+.sidebar-nav a:hover, .sidebar-nav a.active { color: #0066cc; background: rgba(0,102,204,0.04); padding-left: 28px; }
+.sidebar-nav a.active { font-weight: 700; border-left: 3px solid #0066cc; }
+
+/* CARDS / SECTIONS */
+.section-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 40px; margin-bottom: 40px; }
+.section-card h2 { font-size: 1.4rem; font-weight: 700; color: #0066cc; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #0066cc; }
+.section-card h3 { font-size: 1.1rem; font-weight: 700; color: #333; margin: 20px 0 12px; }
+
+/* TABLE */
+.info-table { width: 100%; border-collapse: collapse; }
+.info-table th, .info-table td { padding: 14px 16px; border-bottom: 1px solid #eee; font-size: 0.95rem; text-align: left; vertical-align: top; }
+.info-table th { width: 180px; background: #f8f9fa; font-weight: 500; color: #333; white-space: nowrap; }
+.info-table td { color: #555; }
+
+/* MAP */
+.map-container { margin-top: 30px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.map-container iframe { width: 100%; height: 400px; border: none; }
+
+/* FOOTER */
+.footer { background: #1a1a2e; color: #fff; margin-top: 80px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; padding: 50px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-logo img { height: 36px; margin-bottom: 12px; }
+.footer-address { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.8; }
+.footer-twitter img { height: 28px; opacity: 0.7; transition: opacity 0.3s ease; }
+.footer-twitter:hover img { opacity: 1; }
+.footer-copyright { text-align: center; padding: 20px; font-size: 0.8rem; color: rgba(255,255,255,0.5); border-top: 1px solid rgba(255,255,255,0.1); }
+
+/* BACK TO TOP */
+.back-to-top { display: block; text-align: center; padding: 20px; background: #f8f9fa; color: #0066cc; font-size: 0.9rem; font-weight: 500; transition: background 0.3s ease; }
+.back-to-top:hover { background: #e9ecef; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .content-wrapper { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .sidebar-nav { position: static; }
+}
+@media (max-width: 768px) {
+  .header { padding: 0 20px; }
+  .header-nav { display: none; }
+  .hamburger { display: flex; }
+  .page-hero { height: 220px; margin-top: 80px; }
+  .page-hero-title { font-size: 1.6rem; }
+  .breadcrumb { padding: 12px 20px; }
+  .content-wrapper { padding: 0 20px; margin: 30px auto; gap: 30px; }
+  .section-card { padding: 24px; }
+  .info-table th, .info-table td { display: block; width: 100%; }
+  .info-table th { background: #f0f4ff; border-bottom: none; padding-bottom: 4px; }
+  .info-table td { padding-top: 4px; }
+  .footer-inner { padding: 30px 20px; flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="pattern-b.html" class="header-logo"><img src="image/header_logo.png" alt="テクニカル・シンク"></a>
+  <nav class="header-nav">
+    <a href="b-about.html">会社概要</a>
+    <a href="b-works.html">業務内容</a>
+    <a href="b-office.html">オフィス探訪</a>
+    <a href="b-recruit.html">採用情報</a>
+    <a href="b-staff.html">スタッフ紹介</a>
+    <a href="b-president.html">会長・代表者挨拶</a>
+    <a href="b-philosophy.html">企業理念</a>
+    <a href="b-history.html">沿革</a>
+  </nav>
+  <div class="header-right">
+    <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="header-twitter"><img src="image/twitter.png" alt="Twitter"></a>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="pattern-b.html">トップ</a>
+  <a href="b-about.html">会社概要</a>
+  <a href="b-works.html">業務内容</a>
+  <a href="b-office.html">オフィス探訪</a>
+  <a href="b-recruit.html">採用情報</a>
+  <a href="b-staff.html">スタッフ紹介</a>
+  <a href="b-president.html">会長・代表者挨拶</a>
+  <a href="b-philosophy.html">企業理念</a>
+  <a href="b-history.html">沿革</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <img src="image/about_mv.png" alt="会社概要">
+  <div class="page-hero-overlay">
+    <h1 class="page-hero-title">会社概要</h1>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="pattern-b.html">トップ</a> &gt; 会社概要
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrapper">
+  <main class="main-content">
+    <div class="section-card">
+      <h2>会社概要 - COMPANY</h2>
+      <table class="info-table">
+        <tr><th>会社名</th><td>株式会社テクニカル・シンク（TECHNICAL THINK CORPORATION）</td></tr>
+        <tr><th>代表取締役社長</th><td>寺岡 國仁</td></tr>
+        <tr><th>本社所在地</th><td>〒661-0953 兵庫県尼崎市東園田町9丁目16番8号</td></tr>
+        <tr><th>本社TEL</th><td>06-6430-9174</td></tr>
+        <tr><th>本社FAX</th><td>06-6430-9175</td></tr>
+        <tr><th>創立</th><td>2006年10月20日</td></tr>
+        <tr><th>資本金</th><td>1500万円</td></tr>
+        <tr><th>事業年度</th><td>毎年10月1日から翌年9月30日迄</td></tr>
+        <tr><th>主な事業内容</th><td>各種解析・検討業務<br>設計支援および設計精査業務<br>構造物調査および補修・補強設計業務<br>計測および環境調査業務<br>非破壊検査</td></tr>
+        <tr><th>建設業許可</th><td>兵庫県知事 許可（般－4）第218559号</td></tr>
+        <tr><th>従業員数</th><td>12名</td></tr>
+        <tr><th>有資格者</th><td>技術士 1名<br>RCCM 1名<br>1級土木施工管理技士 4名<br>測量士 3名<br>コンクリート診断士 2名<br>道路橋点検士 5名<br>安全衛生責任者 3名</td></tr>
+      </table>
+    </div>
+
+    <div class="section-card">
+      <h2>アクセス - ACCESS</h2>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3278.123!2d135.434!3d34.754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5YWs5bqr55yM5bC85bSO5biC5p2x5ZyS55Sw55S6OeS4geebrjE2!5e0!3m2!1sja!2sjp!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-title">会社情報</div>
+      <a href="b-about.html" class="active">会社概要</a>
+      <a href="b-works.html">業務内容</a>
+      <a href="b-president.html">会長・代表者挨拶</a>
+      <a href="b-philosophy.html">企業理念</a>
+      <a href="b-history.html">沿革</a>
+      <a href="b-office.html">オフィス探訪</a>
+      <a href="b-recruit.html">採用情報</a>
+      <a href="b-staff.html">スタッフ紹介</a>
+    </nav>
+  </aside>
+</div>
+
+<!-- BACK TO TOP -->
+<a href="pattern-b.html" class="back-to-top">&larr; トップページに戻る</a>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-info">
+      <a href="pattern-b.html" class="footer-logo"><img src="image/footer_logo.png" alt="テクニカル・シンク"></a>
+      <p class="footer-address">〒661-0953 兵庫県尼崎市東園田町9丁目16番8号<br>TEL.06-6430-9174</p>
+    </div>
+    <div class="footer-right">
+      <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="footer-twitter"><img src="image/twitter.png" alt="Twitter"></a>
+    </div>
+  </div>
+  <div class="footer-copyright">Copyright&copy; TECHNICAL THINK Co., Ltd.</div>
+</footer>
+
+<script>
+(function() {
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileOverlay');
+  function toggleMenu() {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  }
+  hamburger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+  var mobileLinks = mobileMenu.querySelectorAll('a');
+  for (var i = 0; i < mobileLinks.length; i++) {
+    mobileLinks[i].addEventListener('click', function() { if (mobileMenu.classList.contains('active')) toggleMenu(); });
+  }
+})();
+</script>
+</body>
+</html>
