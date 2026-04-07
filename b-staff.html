@@ -61,8 +61,8 @@ img { max-width: 100%; height: auto; display: block; }
 .staff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
 .staff-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .staff-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
-.staff-card-photo { width: 100%; height: 280px; overflow: hidden; }
-.staff-card-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.staff-card-photo { width: 100%; aspect-ratio: 3 / 4; overflow: hidden; }
+.staff-card-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .staff-card-body { padding: 24px; }
 .staff-card-name { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #e8f4fd; }
 .staff-qa { margin-bottom: 12px; }
@@ -97,7 +97,7 @@ img { max-width: 100%; height: auto; display: block; }
   .content-wrapper { padding: 0 20px; margin: 30px auto; gap: 30px; }
   .section-card { padding: 24px; }
   .staff-grid { grid-template-columns: 1fr; }
-  .staff-card-photo { height: 240px; }
+  .staff-card-photo { aspect-ratio: 3 / 4; }
   .footer-inner { padding: 30px 20px; flex-direction: column; text-align: center; }
 }
 </style>
