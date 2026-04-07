@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社テクニカル・シンク | TECHNICAL THINK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #0d0d0d;
+  color: #e0e0e0;
+  overflow-x: hidden;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+ul { list-style: none; }
+
+/* ===== PARTICLE BACKGROUND ===== */
+.particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: #00e5ff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat linear infinite;
+}
+.particle:nth-child(1)  { left: 5%;  animation-duration: 18s; animation-delay: 0s; }
+.particle:nth-child(2)  { left: 12%; animation-duration: 22s; animation-delay: 2s; }
+.particle:nth-child(3)  { left: 20%; animation-duration: 16s; animation-delay: 4s; }
+.particle:nth-child(4)  { left: 28%; animation-duration: 25s; animation-delay: 1s; }
+.particle:nth-child(5)  { left: 35%; animation-duration: 20s; animation-delay: 3s; }
+.particle:nth-child(6)  { left: 45%; animation-duration: 17s; animation-delay: 5s; }
+.particle:nth-child(7)  { left: 55%; animation-duration: 23s; animation-delay: 0.5s; }
+.particle:nth-child(8)  { left: 62%; animation-duration: 19s; animation-delay: 2.5s; }
+.particle:nth-child(9)  { left: 72%; animation-duration: 21s; animation-delay: 4.5s; }
+.particle:nth-child(10) { left: 80%; animation-duration: 15s; animation-delay: 1.5s; }
+.particle:nth-child(11) { left: 88%; animation-duration: 24s; animation-delay: 3.5s; }
+.particle:nth-child(12) { left: 95%; animation-duration: 18s; animation-delay: 0.8s; }
+.particle:nth-child(13) { left: 8%;  animation-duration: 20s; animation-delay: 6s; }
+.particle:nth-child(14) { left: 40%; animation-duration: 16s; animation-delay: 7s; }
+.particle:nth-child(15) { left: 68%; animation-duration: 22s; animation-delay: 5.5s; }
+.particle:nth-child(16) { left: 15%; animation-duration: 19s; animation-delay: 8s; }
+.particle:nth-child(17) { left: 50%; animation-duration: 14s; animation-delay: 6.5s; }
+.particle:nth-child(18) { left: 78%; animation-duration: 21s; animation-delay: 9s; }
+.particle:nth-child(19) { left: 32%; animation-duration: 17s; animation-delay: 7.5s; }
+.particle:nth-child(20) { left: 90%; animation-duration: 23s; animation-delay: 3s; }
+
+@keyframes particleFloat {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  50%  { opacity: 0.3; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+/* ===== STICKY HEADER ===== */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(13, 13, 13, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 24px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header.scrolled {
+  border-bottom-color: #00e5ff;
+  box-shadow: 0 2px 20px rgba(0, 229, 255, 0.15);
+}
+.header-logo img {
+  height: 40px;
+  width: auto;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-twitter img {
+  width: 28px; height: 28px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.header-twitter:hover img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px #00e5ff);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 36px; height: 36px;
+  cursor: pointer;
+  gap: 6px;
+  z-index: 1100;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 26px; height: 2px;
+  background: #00e5ff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Mobile slide menu */
+.slide-menu {
+  position: fixed;
+  top: 0; right: -320px;
+  width: 300px; height: 100vh;
+  background: rgba(13, 13, 13, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1050;
+  padding: 90px 30px 40px;
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 2px solid #00e5ff;
+  overflow-y: auto;
+}
+.slide-menu.open { right: 0; }
+.slide-menu a {
+  display: block;
+  padding: 14px 0;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-menu a:hover {
+  color: #00e5ff;
+  padding-left: 10px;
+}
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1040;
+}
+.menu-overlay.active { display: block; }
+
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+}
+.hero-slides {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.hero-slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  animation: kenBurns 18s ease-in-out infinite alternate;
+}
+.hero-slide:nth-child(2) img { animation-delay: -6s; }
+.hero-slide:nth-child(3) img { animation-delay: -12s; }
+
+@keyframes kenBurns {
+  0%   { transform: scale(1) translate(0, 0); }
+  50%  { transform: scale(1.12) translate(-1%, -1%); }
+  100% { transform: scale(1.05) translate(1%, 0.5%); }
+}
+
+/* Scan-line overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Dark gradient overlay */
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  z-index: 2;
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 18%;
+  left: 8%;
+  z-index: 4;
+}
+.hero-tagline {
+  font-size: clamp(28px, 5vw, 56px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.12em;
+  text-shadow:
+    0 0 10px rgba(0, 229, 255, 0.8),
+    0 0 30px rgba(0, 229, 255, 0.5),
+    0 0 60px rgba(0, 229, 255, 0.3),
+    0 0 100px rgba(0, 128, 255, 0.2);
+  animation: glowPulse 3s ease-in-out infinite alternate;
+}
+.hero-sub {
+  font-size: clamp(13px, 1.8vw, 18px);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 12px;
+  letter-spacing: 0.15em;
+}
+
+@keyframes glowPulse {
+  0%   { text-shadow: 0 0 10px rgba(0,229,255,0.8), 0 0 30px rgba(0,229,255,0.5), 0 0 60px rgba(0,229,255,0.3); }
+  100% { text-shadow: 0 0 15px rgba(0,229,255,1), 0 0 40px rgba(0,229,255,0.7), 0 0 80px rgba(0,229,255,0.4), 0 0 120px rgba(0,128,255,0.3); }
+}
+
+/* ===== SECTION GENERAL ===== */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 24px;
+}
+
+/* Skewed divider */
+.skew-divider {
+  position: relative;
+  height: 80px;
+  z-index: 1;
+  margin-top: -40px;
+}
+.skew-divider::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #0d0d0d;
+  transform: skewY(-2.5deg);
+  transform-origin: top left;
+}
+
+/* ===== MENU SECTION ===== */
+.menu-section {
+  background: #0d0d0d;
+  padding: 80px 24px 100px;
+}
+.menu-section .section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  perspective: 1200px;
+}
+.menu-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  border: 1px solid rgba(0, 229, 255, 0.08);
+  background: #111;
+}
+.menu-card:hover {
+  transform: perspective(800px) rotateY(-5deg) rotateX(3deg) translateY(-8px);
+  box-shadow:
+    0 0 15px rgba(0, 229, 255, 0.4),
+    0 0 40px rgba(0, 229, 255, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: #00e5ff;
+}
+.menu-card a {
+  display: block;
+}
+.menu-card-img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  filter: grayscale(30%) brightness(0.85);
+  transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-card:hover .menu-card-img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+.menu-card-body {
+  padding: 18px 16px;
+  position: relative;
+}
+.menu-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fff;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-card:hover .menu-card-title {
+  color: #00e5ff;
+}
+.menu-card-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%) translateX(0);
+  color: #00e5ff;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-card:hover .menu-card-arrow {
+  opacity: 1;
+  transform: translateY(-50%) translateX(4px);
+}
+.menu-card-img-wrap {
+  overflow: hidden;
+}
+
+/* ===== NEWS SECTION ===== */
+.news-section {
+  position: relative;
+  background: #0a0a0a;
+  padding: 80px 24px 100px;
+}
+.news-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 6px;
+  background: linear-gradient(90deg, transparent, #00e5ff, #0080ff, transparent);
+}
+.news-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.news-title-img {
+  height: 28px;
+  margin-bottom: 40px;
+  filter: brightness(0) invert(1);
+}
+.news-accordion-item {
+  border-left: 3px solid #00e5ff;
+  margin-bottom: 4px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.news-accordion-item:hover {
+  background: rgba(0, 229, 255, 0.04);
+}
+.news-accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.news-accordion-header:hover {
+  padding-left: 28px;
+}
+.news-date {
+  font-size: 13px;
+  font-weight: 500;
+  color: #00e5ff;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  min-width: 120px;
+}
+.news-headline {
+  font-size: 15px;
+  font-weight: 400;
+  flex: 1;
+}
+.news-toggle {
+  width: 24px; height: 24px;
+  position: relative;
+  flex-shrink: 0;
+}
+.news-toggle::before,
+.news-toggle::after {
+  content: '';
+  position: absolute;
+  background: #00e5ff;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.news-toggle::before {
+  width: 14px; height: 2px;
+  top: 11px; left: 5px;
+}
+.news-toggle::after {
+  width: 2px; height: 14px;
+  top: 5px; left: 11px;
+}
+.news-accordion-item.open .news-toggle::after {
+  transform: rotate(90deg);
+}
+.news-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.news-accordion-body-inner {
+  padding: 0 20px 20px 160px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.8;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  background:
+    linear-gradient(rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.95)),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 29px,
+      rgba(0, 229, 255, 0.04) 29px,
+      rgba(0, 229, 255, 0.04) 30px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 29px,
+      rgba(0, 229, 255, 0.04) 29px,
+      rgba(0, 229, 255, 0.04) 30px
+    );
+  padding: 60px 24px 30px;
+  text-align: center;
+  border-top: 1px solid rgba(0, 229, 255, 0.1);
+}
+.footer-logo img {
+  height: 36px;
+  margin: 0 auto 24px;
+  filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(0,229,255,0.3));
+}
+.footer-address {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 2;
+  letter-spacing: 0.06em;
+}
+.footer-tel {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 4px;
+  letter-spacing: 0.08em;
+}
+.footer-twitter {
+  display: inline-block;
+  margin-top: 20px;
+}
+.footer-twitter img {
+  width: 28px; height: 28px;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.footer-twitter:hover img {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px #00e5ff);
+}
+.footer-copyright {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.08em;
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .header-twitter.desktop-only { display: none; }
+  .site-header { height: 60px; padding: 0 16px; }
+  .header-logo img { height: 32px; }
+  .hero { clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); }
+  .hero-content { left: 6%; bottom: 22%; }
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .menu-section { padding: 60px 16px 80px; }
+  .news-section { padding: 60px 16px 80px; }
+  .news-accordion-body-inner { padding-left: 20px; }
+  .news-accordion-header { flex-wrap: wrap; gap: 8px; }
+  .news-date { min-width: auto; }
+}
+@media (max-width: 480px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .hero-content { left: 5%; bottom: 18%; }
+  .menu-card:hover {
+    transform: translateY(-4px);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== PARTICLES ===== -->
+<div class="particles">
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <div class="particle"></div><div class="particle"></div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="siteHeader">
+  <a href="http://technicalthink.jp/index.html" class="header-logo">
+    <img src="http://technicalthink.jp/image/header_logo.png" alt="TECHNICAL THINK">
+  </a>
+  <div class="header-right">
+    <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="header-twitter desktop-only">
+      <img src="http://technicalthink.jp/image/twitter.png" alt="Twitter">
+    </a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== SLIDE MENU ===== -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="slide-menu" id="slideMenu">
+  <a href="http://technicalthink.jp/index.html">トップページ</a>
+  <a href="http://technicalthink.jp/about.html">会社概要</a>
+  <a href="http://technicalthink.jp/president.html">会長・代表者挨拶</a>
+  <a href="http://technicalthink.jp/philosophy.html">企業理念</a>
+  <a href="http://technicalthink.jp/history.html">沿革</a>
+  <a href="http://technicalthink.jp/pdf/achievement.pdf">実績・主要取引先</a>
+  <a href="http://technicalthink.jp/works.html">業務内容</a>
+  <a href="http://technicalthink.jp/office.html">オフィス探訪</a>
+  <a href="http://technicalthink.jp/recruit.html">採用情報</a>
+  <a href="http://technicalthink.jp/staff.html">スタッフ紹介</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active">
+      <img src="http://technicalthink.jp/image/top_mv01.jpg" alt="TECHNICAL THINK">
+    </div>
+    <div class="hero-slide">
+      <img src="http://technicalthink.jp/image/top_mv02.jpg" alt="TECHNICAL THINK">
+    </div>
+    <div class="hero-slide">
+      <img src="http://technicalthink.jp/image/top_mv03.jpg" alt="TECHNICAL THINK">
+    </div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-tagline">未来を、技術で切り拓く。</h1>
+    <p class="hero-sub">TECHNICAL THINK ─ 構造で、社会を支える。</p>
+  </div>
+</section>
+
+<!-- ===== SKEW DIVIDER ===== -->
+<div class="skew-divider"></div>
+
+<!-- ===== MENU SECTION ===== -->
+<section class="menu-section section">
+  <div class="section-inner">
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <a href="http://technicalthink.jp/about.html">
+          <div class="menu-card-img-wrap">
+            <img class="menu-card-img" src="http://technicalthink.jp/image/top_menu01b.jpg" alt="会社概要">
+          </div>
+          <div class="menu-card-body">
+            <span class="menu-card-title">会社概要</span>
+            <span class="menu-card-arrow">→</span>
+          </div>
+        </a>
+      </div>
+      <div class="menu-card fade-up">
+        <a href="http://technicalthink.jp/works.html">
+          <div class="menu-card-img-wrap">
+            <img class="menu-card-img" src="http://technicalthink.jp/image/top_menu02b.jpg" alt="業務内容">
+          </div>
+          <div class="menu-card-body">
+            <span class="menu-card-title">業務内容</span>
+            <span class="menu-card-arrow">→</span>
+          </div>
+        </a>
+      </div>
+      <div class="menu-card fade-up">
+        <a href="http://technicalthink.jp/office.html">
+          <div class="menu-card-img-wrap">
+            <img class="menu-card-img" src="http://technicalthink.jp/image/top_menu03b.jpg" alt="オフィス探訪">
+          </div>
+          <div class="menu-card-body">
+            <span class="menu-card-title">オフィス探訪</span>
+            <span class="menu-card-arrow">→</span>
+          </div>
+        </a>
+      </div>
+      <div class="menu-card fade-up">
+        <a href="http://technicalthink.jp/recruit.html">
+          <div class="menu-card-img-wrap">
+            <img class="menu-card-img" src="http://technicalthink.jp/image/top_menu04b.jpg" alt="採用情報">
+          </div>
+          <div class="menu-card-body">
+            <span class="menu-card-title">採用情報</span>
+            <span class="menu-card-arrow">→</span>
+          </div>
+        </a>
+      </div>
+      <div class="menu-card fade-up">
+        <a href="http://technicalthink.jp/staff.html">
+          <div class="menu-card-img-wrap">
+            <img class="menu-card-img" src="http://technicalthink.jp/image/top_menu05b.jpg" alt="スタッフ紹介">
+          </div>
+          <div class="menu-card-body">
+            <span class="menu-card-title">スタッフ紹介</span>
+            <span class="menu-card-arrow">→</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWS & TOPICS ===== -->
+<section class="news-section section">
+  <div class="news-inner">
+    <img class="news-title-img fade-up" src="http://technicalthink.jp/image/top_news-topix.png" alt="NEWS & TOPICS">
+
+    <div class="news-accordion-item fade-up">
+      <div class="news-accordion-header" onclick="toggleAccordion(this)">
+        <span class="news-date">2025年1月30日</span>
+        <span class="news-headline">ホームページを更新しました。</span>
+        <span class="news-toggle"></span>
+      </div>
+      <div class="news-accordion-body">
+        <div class="news-accordion-body-inner">
+          ホームページを更新しました。新しいデザインと最新の情報をご覧ください。
+        </div>
+      </div>
+    </div>
+
+    <div class="news-accordion-item fade-up">
+      <div class="news-accordion-header" onclick="toggleAccordion(this)">
+        <span class="news-date">2019年2月12日</span>
+        <span class="news-headline">ホームページ開設しました。</span>
+        <span class="news-toggle"></span>
+      </div>
+      <div class="news-accordion-body">
+        <div class="news-accordion-body-inner">
+          株式会社テクニカル・シンクの公式ホームページを開設いたしました。今後ともよろしくお願いいたします。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-logo">
+    <img src="http://technicalthink.jp/image/footer_logo.png" alt="TECHNICAL THINK">
+  </div>
+  <p class="footer-address">〒661-0953 兵庫県尼崎市東園田町9丁目16番8号</p>
+  <p class="footer-tel">TEL.06-6430-9174</p>
+  <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="footer-twitter">
+    <img src="http://technicalthink.jp/image/twitter.png" alt="Twitter">
+  </a>
+  <p class="footer-copyright">Copyright&copy; TECHNICAL THINK Co., Ltd.</p>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+(function() {
+  'use strict';
+
+  // --- Sticky header glow on scroll ---
+  const header = document.getElementById('siteHeader');
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // --- Hamburger menu ---
+  const hamburger = document.getElementById('hamburgerBtn');
+  const slideMenu = document.getElementById('slideMenu');
+  const overlay = document.getElementById('menuOverlay');
+
+  function toggleMenu() {
+    hamburger.classList.toggle('active');
+    slideMenu.classList.toggle('open');
+    overlay.classList.toggle('active');
+    document.body.style.overflow = slideMenu.classList.contains('open') ? 'hidden' : '';
+  }
+  hamburger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+
+  // Close menu on link click
+  slideMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (slideMenu.classList.contains('open')) toggleMenu();
+    });
+  });
+
+  // --- Hero slideshow ---
+  const slides = document.querySelectorAll('.hero-slide');
+  let currentSlide = 0;
+  function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }
+  setInterval(nextSlide, 5000);
+
+  // --- News accordion ---
+  window.toggleAccordion = function(headerEl) {
+    var item = headerEl.parentElement;
+    var body = item.querySelector('.news-accordion-body');
+    var isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.news-accordion-item').forEach(function(el) {
+      el.classList.remove('open');
+      el.querySelector('.news-accordion-body').style.maxHeight = null;
+    });
+
+    // Open clicked if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  };
+
+  // --- Scroll reveal ---
+  var fadeEls = document.querySelectorAll('.fade-up');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  fadeEls.forEach(function(el) { observer.observe(el); });
+
+  // --- Show hamburger on smaller screens ---
+  function checkWidth() {
+    if (window.innerWidth <= 768) {
+      hamburger.style.display = 'flex';
+    } else {
+      hamburger.style.display = 'none';
+      if (slideMenu.classList.contains('open')) toggleMenu();
+    }
+  }
+  checkWidth();
+  window.addEventListener('resize', checkWidth);
+
+})();
+</script>
+</body>
+</html>

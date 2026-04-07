@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社テクニカル・シンク | TECHNICAL THINK Co., Ltd.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  color: #333;
+  background: #fff;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ========== HEADER ========== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  transition: box-shadow 0.3s ease;
+}
+
+.header-logo img {
+  height: 40px;
+  width: auto;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-nav a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #444;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.header-nav a:hover {
+  color: #0066cc;
+  background: rgba(0, 102, 204, 0.05);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-twitter img {
+  height: 24px;
+  width: 24px;
+  transition: opacity 0.3s ease;
+}
+
+.header-twitter:hover img {
+  opacity: 0.7;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  gap: 6px;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* Mobile Menu */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  max-width: 85vw;
+  height: 100%;
+  background: #fff;
+  z-index: 1060;
+  padding: 100px 30px 40px;
+  overflow-y: auto;
+  transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: -4px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 14px 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu a:first-child {
+  border-top: 1px solid #eee;
+}
+
+.mobile-menu a:hover {
+  color: #0066cc;
+  padding-left: 8px;
+}
+
+/* ========== HERO SLIDESHOW ========== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  overflow: hidden;
+  margin-top: 80px;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 40, 80, 0.45) 0%, rgba(0, 80, 160, 0.25) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.hero-catchphrase {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-catchphrase h1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.12em;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2);
+  line-height: 1.5;
+}
+
+.hero-dots {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+
+.hero-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.hero-dot.active {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+/* ========== SECTIONS COMMON ========== */
+.section {
+  padding: 100px 0;
+}
+
+.section-gray {
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  padding-bottom: 16px;
+  position: relative;
+}
+
+.section-title h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #0066cc, #0099ff);
+  border-radius: 2px;
+}
+
+.section-title span {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #0066cc;
+  margin-top: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ========== MENU CARDS ========== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.menu-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  aspect-ratio: 3 / 4;
+}
+
+.menu-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 102, 204, 0.15);
+  transform: translateY(-6px);
+}
+
+.menu-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.menu-card:hover img {
+  transform: scale(1.1);
+}
+
+.menu-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.85), rgba(0, 153, 255, 0.75));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.menu-card:hover .menu-card-overlay {
+  opacity: 1;
+}
+
+.menu-card-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 16px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  transition: opacity 0.4s ease;
+}
+
+.menu-card:hover .menu-card-title {
+  opacity: 0;
+}
+
+.menu-card-title span {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.menu-card-overlay span {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.menu-card-overlay span::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 2px;
+  background: #fff;
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+/* ========== NEWS SECTION ========== */
+.news-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.news-header img {
+  height: 28px;
+  margin: 0 auto;
+}
+
+.news-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.news-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 28px 32px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.news-item:hover {
+  box-shadow: 0 6px 24px rgba(0, 102, 204, 0.1);
+  border-left-color: #0066cc;
+  transform: translateX(4px);
+}
+
+.news-date {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0066cc, #0099ff);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.news-text {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+  padding-top: 3px;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: #1a2332;
+  color: #c0c8d4;
+  padding: 60px 0 0;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-logo img {
+  height: 36px;
+  margin-bottom: 20px;
+}
+
+.footer-address {
+  font-size: 0.85rem;
+  line-height: 2;
+  color: #8a95a5;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-twitter img {
+  height: 28px;
+  width: 28px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.footer-twitter:hover img {
+  opacity: 1;
+}
+
+.footer-copyright {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  color: #5a6577;
+  letter-spacing: 0.05em;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .header-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hero-catchphrase h1 {
+    font-size: 2.4rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 64px;
+    padding: 0 20px;
+  }
+
+  .header-logo img {
+    height: 32px;
+  }
+
+  .hero {
+    margin-top: 64px;
+    height: 70vh;
+    min-height: 400px;
+  }
+
+  .hero-catchphrase h1 {
+    font-size: 1.8rem;
+    letter-spacing: 0.06em;
+  }
+
+  .section {
+    padding: 70px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .section-title {
+    margin-bottom: 40px;
+  }
+
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .menu-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .news-item {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 24px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-catchphrase h1 {
+    font-size: 1.4rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .menu-card {
+    aspect-ratio: 16 / 9;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <a href="http://technicalthink.jp/index.html" class="header-logo">
+    <img src="http://technicalthink.jp/image/header_logo.png" alt="テクニカル・シンク">
+  </a>
+
+  <nav class="header-nav">
+    <a href="http://technicalthink.jp/about.html">会社概要</a>
+    <a href="http://technicalthink.jp/president.html">会長・代表者挨拶</a>
+    <a href="http://technicalthink.jp/philosophy.html">企業理念</a>
+    <a href="http://technicalthink.jp/history.html">沿革</a>
+    <a href="http://technicalthink.jp/pdf/achievement.pdf">実績・主要取引先</a>
+    <a href="http://technicalthink.jp/works.html">業務内容</a>
+    <a href="http://technicalthink.jp/office.html">オフィス探訪</a>
+    <a href="http://technicalthink.jp/recruit.html">採用情報</a>
+    <a href="http://technicalthink.jp/staff.html">スタッフ紹介</a>
+  </nav>
+
+  <div class="header-right">
+    <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="header-twitter">
+      <img src="http://technicalthink.jp/image/twitter.png" alt="Twitter">
+    </a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="http://technicalthink.jp/index.html">トップページ</a>
+  <a href="http://technicalthink.jp/about.html">会社概要</a>
+  <a href="http://technicalthink.jp/president.html">会長・代表者挨拶</a>
+  <a href="http://technicalthink.jp/philosophy.html">企業理念</a>
+  <a href="http://technicalthink.jp/history.html">沿革</a>
+  <a href="http://technicalthink.jp/pdf/achievement.pdf">実績・主要取引先</a>
+  <a href="http://technicalthink.jp/works.html">業務内容</a>
+  <a href="http://technicalthink.jp/office.html">オフィス探訪</a>
+  <a href="http://technicalthink.jp/recruit.html">採用情報</a>
+  <a href="http://technicalthink.jp/staff.html">スタッフ紹介</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-slide active">
+    <img src="http://technicalthink.jp/image/top_mv01.jpg" alt="スライド1">
+  </div>
+  <div class="hero-slide">
+    <img src="http://technicalthink.jp/image/top_mv02.jpg" alt="スライド2">
+  </div>
+  <div class="hero-slide">
+    <img src="http://technicalthink.jp/image/top_mv03.jpg" alt="スライド3">
+  </div>
+  <div class="hero-overlay">
+    <div class="hero-catchphrase">
+      <h1>確かな技術で、社会を支える。</h1>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <div class="hero-dot active" data-slide="0"></div>
+    <div class="hero-dot" data-slide="1"></div>
+    <div class="hero-dot" data-slide="2"></div>
+  </div>
+</section>
+
+<!-- ===== MENU ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>MENU</h2>
+      <span>メニュー</span>
+    </div>
+    <div class="menu-grid">
+      <a href="http://technicalthink.jp/about.html" class="menu-card">
+        <img src="http://technicalthink.jp/image/top_menu01b.jpg" alt="会社概要">
+        <div class="menu-card-title"><span>会社概要</span></div>
+        <div class="menu-card-overlay"><span>会社概要</span></div>
+      </a>
+      <a href="http://technicalthink.jp/works.html" class="menu-card">
+        <img src="http://technicalthink.jp/image/top_menu02b.jpg" alt="業務内容">
+        <div class="menu-card-title"><span>業務内容</span></div>
+        <div class="menu-card-overlay"><span>業務内容</span></div>
+      </a>
+      <a href="http://technicalthink.jp/office.html" class="menu-card">
+        <img src="http://technicalthink.jp/image/top_menu03b.jpg" alt="オフィス探訪">
+        <div class="menu-card-title"><span>オフィス探訪</span></div>
+        <div class="menu-card-overlay"><span>オフィス探訪</span></div>
+      </a>
+      <a href="http://technicalthink.jp/recruit.html" class="menu-card">
+        <img src="http://technicalthink.jp/image/top_menu04b.jpg" alt="採用情報">
+        <div class="menu-card-title"><span>採用情報</span></div>
+        <div class="menu-card-overlay"><span>採用情報</span></div>
+      </a>
+      <a href="http://technicalthink.jp/staff.html" class="menu-card">
+        <img src="http://technicalthink.jp/image/top_menu05b.jpg" alt="スタッフ紹介">
+        <div class="menu-card-title"><span>スタッフ紹介</span></div>
+        <div class="menu-card-overlay"><span>スタッフ紹介</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWS & TOPICS ===== -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="news-header">
+      <img src="http://technicalthink.jp/image/top_news-topix.png" alt="NEWS &amp; TOPICS">
+    </div>
+    <div class="news-list">
+      <div class="news-item">
+        <span class="news-date">2025.01.30</span>
+        <p class="news-text">ホームページを更新しました。</p>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2019.02.12</span>
+        <p class="news-text">ホームページ開設しました。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-info">
+      <a href="http://technicalthink.jp/index.html" class="footer-logo">
+        <img src="http://technicalthink.jp/image/footer_logo.png" alt="テクニカル・シンク">
+      </a>
+      <p class="footer-address">
+        〒661-0953 兵庫県尼崎市東園田町9丁目16番8号<br>
+        TEL.06-6430-9174
+      </p>
+    </div>
+    <div class="footer-right">
+      <a href="https://twitter.com/Technicalthink1" target="_blank" rel="noopener" class="footer-twitter">
+        <img src="http://technicalthink.jp/image/twitter.png" alt="Twitter">
+      </a>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    Copyright&copy; TECHNICAL THINK Co., Ltd.
+  </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+(function() {
+  // ---- Hamburger Menu ----
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileOverlay');
+
+  function toggleMenu() {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+
+  var mobileLinks = mobileMenu.querySelectorAll('a');
+  for (var i = 0; i < mobileLinks.length; i++) {
+    mobileLinks[i].addEventListener('click', function() {
+      if (mobileMenu.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
+  }
+
+  // ---- Hero Slideshow ----
+  var slides = document.querySelectorAll('.hero-slide');
+  var dots = document.querySelectorAll('.hero-dot');
+  var currentSlide = 0;
+  var slideInterval = 5000;
+  var timer;
+
+  function goToSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+
+  function startTimer() {
+    timer = setInterval(nextSlide, slideInterval);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    startTimer();
+  }
+
+  for (var d = 0; d < dots.length; d++) {
+    dots[d].addEventListener('click', function() {
+      var idx = parseInt(this.getAttribute('data-slide'));
+      if (idx !== currentSlide) {
+        goToSlide(idx);
+        resetTimer();
+      }
+    });
+  }
+
+  startTimer();
+})();
+</script>
+
+</body>
+</html>
